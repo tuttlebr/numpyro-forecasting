@@ -1,0 +1,22 @@
+version: "3"
+services:
+  forecast-gpu:
+    image: bayesian-forecast:gpu
+    entrypoint: python3 /app/src/main/python/app.py
+    build:
+      context: .
+      dockerfile: Dockerfile.gpu
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  forecast-cpu:
+    image: bayesian-forecast:cpu
+    entrypoint: python3 /app/src/main/python/app.py
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu

@@ -1,0 +1,17 @@
+FROM --platform=amd64 python:3.8
+
+ENV PLATFORM=cpu
+
+WORKDIR /app
+
+RUN pip install \
+    jax \
+    jaxlib \
+    numpyro \
+    pandas \
+    torch==1.10.0+cpu \
+    torchvision==0.11.1+cpu \
+    torchaudio==0.10.0+cpu \
+    -f https://download.pytorch.org/whl/cpu/torch_stable.html
+
+COPY . .
