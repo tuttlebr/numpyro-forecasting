@@ -1,6 +1,6 @@
 FROM --platform=amd64 pytorch/pytorch:1.10.0-cuda11.3-cudnn8-devel
 
-ENV PLATFORM=gpu
+ENV PLATFORM=cpu
 
 WORKDIR /app
 
