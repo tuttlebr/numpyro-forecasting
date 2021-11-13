@@ -3,6 +3,7 @@ from logging import basicConfig, info
 from os import getenv
 
 import jax.numpy as jnp
+from multiprocessing import cpu_count
 import numpyro
 import numpyro.distributions as dist
 import pandas as pd
@@ -105,7 +106,7 @@ basicConfig(
 )
 
 platform = getenv("PLATFORM")
-num_devices = local_device_count()
+num_devices = cpu_count()
 
 numpyro.set_host_device_count(num_devices)
 numpyro.set_platform(platform=platform)
