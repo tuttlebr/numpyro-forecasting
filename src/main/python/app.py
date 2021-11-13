@@ -1,5 +1,6 @@
 import time
 from logging import basicConfig, info
+from multiprocessing import cpu_count
 from os import getenv
 
 import jax.numpy as jnp
@@ -7,7 +8,7 @@ from multiprocessing import cpu_count
 import numpyro
 import numpyro.distributions as dist
 import pandas as pd
-from jax import random, local_device_count
+from jax import local_device_count, random
 from numpyro.contrib.control_flow import scan
 from numpyro.diagnostics import autocorrelation
 from numpyro.infer import MCMC, NUTS, Predictive
@@ -26,7 +27,6 @@ def make_data():
     for yt in sorted(annual_trend):
         for mt in sorted(monthly_trend):
             y.extend(weekly_trend * yt * mt)
-    y = y[:365]
     periods = len(y)
 
     df = pd.DataFrame(columns=["ds", "y"])
